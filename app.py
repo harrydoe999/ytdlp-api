@@ -31,8 +31,10 @@ def download():
     else:
         command = [
             "yt-dlp",
-            "-f", f"bestvideo[height<={quality}]+bestaudio/best[height<={quality}]",
+            "-f", f"bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best",
             "--merge-output-format", "mp4",
+            "--no-playlist",
+
             "-o", output_path,
             url
         ]
