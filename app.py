@@ -1,6 +1,13 @@
 import os
 import subprocess
 import uuid
+import shutil
+
+# Install deno if not present
+if not shutil.which("deno"):
+    os.system("curl -fsSL https://deno.land/install.sh | sh")
+    os.environ["PATH"] = f"/opt/render/.deno/bin:{os.environ.get('PATH', '')}"
+
 from flask import Flask, request, jsonify, send_file
 
 app = Flask(__name__)
