@@ -34,6 +34,7 @@ def download():
             "-x", "--audio-format", "mp3",
             "--cookies", "/opt/render/project/src/cookies.txt",
             "--extractor-args", "youtube:player_client=web_safari",
+            "--remote-components", "ejs:github",
             "-o", output_path,
             url
         ]
@@ -45,6 +46,7 @@ def download():
             "--no-playlist",
             "--cookies", "/opt/render/project/src/cookies.txt",
             "--extractor-args", "youtube:player_client=web_safari",
+            "--remote-components", "ejs:github",
             "-o", output_path,
             url
         ]
