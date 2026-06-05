@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
-curl -fsSL https://deno.land/install.sh | sh
-export DENO_INSTALL="/opt/render/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh
 pip install -r requirements.txt
