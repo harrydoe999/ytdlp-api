@@ -39,7 +39,7 @@ def download():
             url
         ]
 
-    subprocess.run(command, check=True)
+    result = subprocess.run(command, check=True, capture_output=True, text=True)
 
     # Find the actual output file
     for f in os.listdir(DOWNLOAD_FOLDER):
