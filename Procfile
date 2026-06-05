@@ -1,2 +1,2 @@
-web: apt-get install -y ffmpeg || true && gunicorn app:app
+web: gunicorn app:app
 
