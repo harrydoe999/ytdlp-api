@@ -13,7 +13,7 @@ def download():
     data = request.get_json()
     url = data.get("url")
     quality = data.get("quality", "1080")
-    mode = data.get("mode", "video")  # "video" or "audio"
+    mode = data.get("mode", "video")
 
     if not url:
         return jsonify({"error": "No URL provided"}), 400
@@ -34,20 +34,17 @@ def download():
             "-f", f"bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best",
             "--merge-output-format", "mp4",
             "--no-playlist",
-
             "-o", output_path,
             url
         ]
 
     try:
-    result = subprocess.run(command, capture_output=True, text=True)
-    if result.returncode != 0:
-        return jsonify({"error": "yt-dlp failed", "details": result.stderr}), 500
-except Exception as e:
-    return jsonify({"error": str(e)}), 500
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode != 0:
+            return jsonify({"error": "yt-dlp failed", "details": result.stderr}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-
-    # Find the actual output file
     for f in os.listdir(DOWNLOAD_FOLDER):
         if f.startswith(file_id):
             return send_file(
@@ -55,7 +52,7 @@ except Exception as e:
                 as_attachment=True
             )
 
-    return jsonify({"error": "Download failed", "details": result.stderr}), 500
+    return jsonify({"error": "Download failed"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
