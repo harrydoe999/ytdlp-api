@@ -26,16 +26,18 @@ def download():
             "yt-dlp",
             "-x", "--audio-format", "mp3",
             "--cookies", "/opt/render/project/src/cookies.txt",
+            "--extractor-args", "youtube:player_client=web_safari",
             "-o", output_path,
             url
         ]
     else:
         command = [
             "yt-dlp",
-            "-f", f"bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best",
+            "-f", f"best[height<={quality}]/best",
             "--merge-output-format", "mp4",
             "--no-playlist",
             "--cookies", "/opt/render/project/src/cookies.txt",
+            "--extractor-args", "youtube:player_client=web_safari",
             "-o", output_path,
             url
         ]
