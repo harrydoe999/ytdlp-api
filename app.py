@@ -25,6 +25,7 @@ def download():
         command = [
             "yt-dlp",
             "-x", "--audio-format", "mp3",
+            "--cookies", "/opt/render/project/src/cookies.txt",
             "-o", output_path,
             url
         ]
@@ -34,6 +35,7 @@ def download():
             "-f", f"bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best",
             "--merge-output-format", "mp4",
             "--no-playlist",
+            "--cookies", "/opt/render/project/src/cookies.txt",
             "-o", output_path,
             url
         ]
