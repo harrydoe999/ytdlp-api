@@ -39,7 +39,13 @@ def download():
             url
         ]
 
-    result = subprocess.run(command, check=True, capture_output=True, text=True)
+    try:
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode != 0:
+        return jsonify({"error": "yt-dlp failed", "details": result.stderr}), 500
+except Exception as e:
+    return jsonify({"error": str(e)}), 500
+
 
     # Find the actual output file
     for f in os.listdir(DOWNLOAD_FOLDER):
@@ -49,7 +55,7 @@ def download():
                 as_attachment=True
             )
 
-    return jsonify({"error": "Download failed"}), 500
+    return jsonify({"error": "Download failed", "details": result.stderr}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
