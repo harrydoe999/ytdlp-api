@@ -45,7 +45,7 @@ def download():
             "--merge-output-format", "mp4",
             "--no-playlist",
             "--cookies", "/opt/render/project/src/cookies.txt",
-            ""--extractor-args", "youtube:player_client=ios",
+            "--extractor-args", "youtube:player_client=ios",
             "--remote-components", "ejs:github",
             "-o", output_path,
             url
